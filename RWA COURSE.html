@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Real World Assets: From Concept to Crypto — BWS Course</title>
+<meta name="description" content="A complete introduction to Real World Asset tokenization — what it is, who leads the space, how Robinhood Chain fits in, and a deep dive into The Index. A Block Wall Street educational resource.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B1426;--navy-2:#101B33;--navy-3:#16233F;
+    --gold:#D4A937;--gold-soft:#E8C766;--gold-dim:rgba(212,169,55,.14);
+    --ink:#EDEFF4;--muted:#9AA3B5;--line:rgba(212,169,55,.22);
+    --green:#4CC38A;--red:#E5645A;--blue:#5B8EF0;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--navy);color:var(--ink);font-family:'Barlow',sans-serif;font-size:17px;line-height:1.65}
+  ::selection{background:var(--gold);color:var(--navy)}
+  .wrap{max-width:900px;margin:0 auto;padding:0 24px}
+  h1,h2,h3,.dsp{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:.03em}
+  .mono{font-family:'DM Mono',monospace}
+  a{color:var(--gold-soft);text-decoration:none}
+  a:hover{text-decoration:underline}
+  button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+  p+p{margin-top:14px}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:50;background:rgba(11,20,38,.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:58px;max-width:900px;margin:0 auto;padding:0 24px}
+  .brand{font-family:'Bebas Neue';font-size:21px;color:var(--gold);letter-spacing:.08em;white-space:nowrap}
+  .brand span{color:var(--ink)}
+  .nav-modules{display:flex;gap:6px}
+  .mod-btn{font-family:'DM Mono';font-size:11px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--muted);cursor:pointer;letter-spacing:.08em;transition:all .15s;white-space:nowrap}
+  .mod-btn:hover,.mod-btn.active{border-color:var(--gold);color:var(--gold);background:var(--gold-dim)}
+  @media(max-width:700px){.nav-modules{display:none}}
+
+  /* PROGRESS BAR */
+  .prog-bar{height:3px;background:var(--navy-3);position:relative}
+  .prog-fill{height:100%;background:var(--gold);width:0%;transition:width .4s ease}
+
+  /* HERO */
+  .hero{padding:80px 0 60px;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-80px;right:-120px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(212,169,55,.07) 0%,transparent 70%);pointer-events:none}
+  .kicker{font-family:'DM Mono';font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+  h1{font-size:clamp(52px,9vw,104px);line-height:.93;color:var(--ink)}
+  h1 em{font-style:normal;color:var(--gold)}
+  .hero-sub{max-width:620px;margin-top:22px;font-size:19px;color:var(--muted)}
+  .hero-sub b{color:var(--ink);font-weight:600}
+  .hero-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+  .tag{font-family:'DM Mono';font-size:12px;padding:7px 14px;border:1px solid var(--line);border-radius:999px;color:var(--gold-soft)}
+  .course-map{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:36px}
+  .cmap{background:var(--navy-2);border:1px solid var(--line);border-radius:10px;padding:18px;cursor:pointer;transition:border-color .15s}
+  .cmap:hover{border-color:var(--gold)}
+  .cmap .num{font-family:'Bebas Neue';font-size:34px;color:var(--gold);line-height:1}
+  .cmap .title{font-size:14px;font-weight:600;margin-top:4px}
+  .cmap .sub{font-size:13px;color:var(--muted);margin-top:4px}
+
+  /* MODULE HEADER */
+  .mod-header{padding:56px 0 40px;border-bottom:1px solid var(--line);position:relative}
+  .mod-number{font-family:'DM Mono';font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+  .mod-header h2{font-size:clamp(40px,6vw,64px);margin-bottom:12px}
+  .mod-header .intro{font-size:19px;color:var(--muted);max-width:680px}
+  .mod-header .intro b{color:var(--ink);font-weight:600}
+
+  /* SECTIONS */
+  section{padding:52px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+  .eyebrow{font-family:'DM Mono';font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+  h2.sh{font-size:clamp(30px,4vw,44px);margin-bottom:16px}
+  .lede{font-size:19px;color:var(--muted);max-width:680px;margin-bottom:26px}
+  .lede b{color:var(--ink);font-weight:600}
+  .body-text{color:var(--muted);max-width:700px}
+  .body-text b{color:var(--ink);font-weight:600}
+
+  /* CARDS */
+  .grid{display:grid;gap:14px}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+  .g4{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+  .card{background:var(--navy-2);border:1px solid var(--line);border-radius:12px;padding:22px}
+  .card h3{font-size:21px;color:var(--gold-soft);margin-bottom:8px}
+  .card p{font-size:15.5px;color:var(--muted)}
+  .card p b{color:var(--ink);font-weight:600}
+  .card .badge{font-family:'DM Mono';font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+
+  /* STAT BLOCKS */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+  .stat{background:var(--navy-2);border:1px solid var(--line);border-radius:12px;padding:18px}
+  .stat .n{font-family:'Bebas Neue';font-size:38px;color:var(--gold);line-height:1}
+  .stat .l{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.4}
+  .asof{font-family:'DM Mono';font-size:11px;color:var(--muted);margin-top:12px;letter-spacing:.1em;text-transform:uppercase}
+
+  /* TIMELINE */
+  .timeline{position:relative;padding-left:28px;margin-top:8px}
+  .timeline::before{content:'';position:absolute;left:8px;top:8px;bottom:8px;width:2px;background:var(--line)}
+  .tevent{position:relative;padding:0 0 28px 24px}
+  .tevent::before{content:'';position:absolute;left:-20px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--gold);border:2px solid var(--navy)}
+  .tevent .date{font-family:'DM Mono';font-size:12px;color:var(--gold);letter-spacing:.1em;margin-bottom:4px}
+  .tevent h3{font-size:20px;margin-bottom:4px}
+  .tevent p{font-size:15px;color:var(--muted)}
+  .tevent p b{color:var(--ink);font-weight:600}
+
+  /* PROJECT ROWS */
+  .project{display:grid;grid-template-columns:80px 1fr;gap:20px;padding:24px 0;border-bottom:1px solid rgba(255,255,255,.06);align-items:start}
+  .project:last-child{border-bottom:none}
+  .proj-icon{width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue';font-size:20px;letter-spacing:.05em;flex-shrink:0}
+  .proj-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .proj-tag{font-family:'DM Mono';font-size:11px;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+  .proj-tag.highlight{border-color:rgba(212,169,55,.5);color:var(--gold-soft)}
+  .project h3{font-size:24px;margin-bottom:4px}
+  .project p{font-size:15.5px;color:var(--muted)}
+  .project p b{color:var(--ink);font-weight:600}
+
+  /* LOOP STEPS */
+  .loop{counter-reset:step;display:grid;gap:0;margin-top:8px}
+  .step{display:grid;grid-template-columns:60px 1fr;gap:16px;padding:20px 0;border-bottom:1px dashed rgba(212,169,55,.2)}
+  .step:last-child{border-bottom:none}
+  .step::before{counter-increment:step;content:counter(step,decimal-leading-zero);font-family:'Bebas Neue';font-size:40px;color:var(--gold);line-height:1;opacity:.9}
+  .step h3{font-size:22px;margin-bottom:5px}
+  .step p{color:var(--muted);font-size:16px;max-width:640px}
+  .step p b{color:var(--ink);font-weight:600}
+  .loopback{margin-top:16px;padding:14px 18px;background:var(--gold-dim);border:1px solid var(--line);border-radius:10px;font-size:15.5px;color:var(--gold-soft)}
+  .loopback b{color:var(--ink)}
+
+  /* SPLITBAR */
+  .splitbar{display:flex;height:48px;border-radius:10px;overflow:hidden;margin:16px 0 8px;border:1px solid var(--line)}
+  .splitbar div{display:flex;align-items:center;justify-content:center;font-family:'DM Mono';font-size:13px}
+  .s75{flex:75;background:var(--gold);color:var(--navy);font-weight:500}
+  .s25{flex:25;background:var(--navy-3);color:var(--gold-soft)}
+
+  /* SPIRAL */
+  .spiral{border-radius:12px;padding:22px;border:1px solid}
+  .up{background:rgba(76,195,138,.06);border-color:rgba(76,195,138,.3)}
+  .down{background:rgba(229,100,90,.06);border-color:rgba(229,100,90,.3)}
+  .spiral h3{font-size:22px;margin-bottom:10px}
+  .up h3{color:var(--green)}.down h3{color:var(--red)}
+  .chain{font-size:15.5px;color:var(--muted);line-height:2.1}
+  .chain b{color:var(--ink);font-weight:600}
+  .arrowword{color:var(--gold);font-family:'DM Mono';font-size:13px;padding:0 4px}
+
+  /* GLOSSARY */
+  dl{display:grid;gap:0}
+  .term{display:grid;grid-template-columns:180px 1fr;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+  .term:last-child{border-bottom:none}
+  dt{font-family:'DM Mono';font-size:13px;color:var(--gold-soft);padding-top:2px}
+  dd{font-size:15.5px;color:var(--muted)}
+  dd b{color:var(--ink);font-weight:600}
+  @media(max-width:600px){.term{grid-template-columns:1fr;gap:4px}}
+
+  /* RISKS */
+  .risk{display:grid;grid-template-columns:32px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+  .risk:last-child{border-bottom:none}
+  .risk .flag{color:var(--red);font-family:'Bebas Neue';font-size:22px;line-height:1.3}
+  .risk h3{font-size:20px;margin-bottom:4px}
+  .risk p{font-size:15.5px;color:var(--muted)}
+  .risk p b{color:var(--ink);font-weight:600}
+
+  /* CALLOUT */
+  .callout{background:var(--gold-dim);border:1px solid rgba(212,169,55,.4);border-radius:12px;padding:22px;margin:20px 0}
+  .callout h3{font-size:22px;color:var(--gold-soft);margin-bottom:8px}
+  .callout p{font-size:15.5px;color:var(--muted)}
+  .callout p b{color:var(--ink);font-weight:600}
+
+  /* QUIZ */
+  .q{background:var(--navy-2);border:1px solid var(--line);border-radius:12px;padding:22px;margin-bottom:14px}
+  .q h3{font-size:19px;margin-bottom:14px;font-family:'Barlow';font-weight:600;letter-spacing:0}
+  .opt{display:block;width:100%;text-align:left;background:var(--navy-3);border:1px solid rgba(255,255,255,.08);color:var(--ink);font-family:'Barlow';font-size:15.5px;padding:11px 16px;border-radius:8px;margin-bottom:8px;cursor:pointer;transition:border-color .15s}
+  .opt:hover{border-color:var(--gold)}
+  .opt.correct{border-color:var(--green);background:rgba(76,195,138,.12)}
+  .opt.wrong{border-color:var(--red);background:rgba(229,100,90,.12)}
+  .why{display:none;font-size:14.5px;color:var(--gold-soft);margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
+  .q.answered .why{display:block}
+  .score{font-family:'DM Mono';font-size:14px;color:var(--gold);margin-top:8px}
+
+  /* MODULE DIVIDER */
+  .mod-divider{padding:40px 0 0;margin-top:20px}
+  .mod-divider-inner{border-top:2px solid var(--gold);padding-top:36px}
+  .mod-divider .mod-label{font-family:'DM Mono';font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+
+  /* YIELD TABLE */
+  .yield-table{width:100%;border-collapse:collapse;margin-top:8px}
+  .yield-table th{font-family:'DM Mono';font-size:12px;text-align:left;padding:10px 14px;color:var(--gold);border-bottom:1px solid var(--line);letter-spacing:.1em;text-transform:uppercase}
+  .yield-table td{padding:12px 14px;font-size:15px;border-bottom:1px solid rgba(255,255,255,.05);color:var(--muted)}
+  .yield-table td:first-child{color:var(--ink);font-weight:600}
+  .yield-table td b{color:var(--green)}
+  .yield-table tr:last-child td{border-bottom:none}
+  .yield-table tr:hover td{background:rgba(255,255,255,.02)}
+
+  /* FOOTER */
+  footer{padding:48px 0 72px}
+  .disclaimer{background:var(--navy-2);border:1px solid var(--line);border-radius:12px;padding:22px;font-size:14px;color:var(--muted)}
+  .disclaimer b{color:var(--gold-soft)}
+  .credit{margin-top:24px;font-family:'DM Mono';font-size:12px;color:var(--muted);letter-spacing:.15em;text-transform:uppercase}
+  .credit span{color:var(--gold)}
+
+  /* ANIMATIONS */
+  @media(prefers-reduced-motion:no-preference){
+    .hero .wrap>*{animation:rise .55s ease both}
+    .hero .wrap>*:nth-child(2){animation-delay:.07s}
+    .hero .wrap>*:nth-child(3){animation-delay:.14s}
+    .hero .wrap>*:nth-child(4){animation-delay:.21s}
+    .hero .wrap>*:nth-child(5){animation-delay:.28s}
+    @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  }
+
+  .capt{font-size:13.5px;color:var(--muted)}
+  .divider-line{border:none;border-top:1px solid var(--line);margin:40px 0}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="brand">BWS <span>/ RWA Course</span></div>
+    <div class="nav-modules">
+      <button class="mod-btn active" onclick="scrollTo('#mod1')">01 What is RWA</button>
+      <button class="mod-btn" onclick="scrollTo('#mod2')">02 The Players</button>
+      <button class="mod-btn" onclick="scrollTo('#mod3')">03 Robinhood Chain</button>
+      <button class="mod-btn" onclick="scrollTo('#mod4')">04 The Index</button>
+    </div>
+  </div>
+  <div class="prog-bar"><div class="prog-fill" id="prog"></div></div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="wrap">
+    <div class="kicker">Block Wall Street &middot; Full Course &middot; Summer 2026</div>
+    <h1>Real World<br>Assets: <em>From<br>Concept<br>to Crypto</em></h1>
+    <p class="hero-sub">Four modules. One story. How <b>trillions of dollars</b> in real-world assets are moving onto blockchains — and why it matters right now, not in 10 years.</p>
+    <div class="hero-tags">
+      <span class="tag">4 Modules</span>
+      <span class="tag">Plain English throughout</span>
+      <span class="tag">Quizzes in every module</span>
+      <span class="tag">~25 minute read</span>
+    </div>
+    <div class="course-map">
+      <div class="cmap" onclick="scrollTo('#mod1')">
+        <div class="num">01</div>
+        <div class="title">What is RWA?</div>
+        <div class="sub">The concept, the categories, the real-world examples</div>
+      </div>
+      <div class="cmap" onclick="scrollTo('#mod2')">
+        <div class="num">02</div>
+        <div class="title">The Big Players</div>
+        <div class="sub">ONDO, BlackRock, Maple, Centrifuge &amp; more</div>
+      </div>
+      <div class="cmap" onclick="scrollTo('#mod3')">
+        <div class="num">03</div>
+        <div class="title">Robinhood Chain</div>
+        <div class="sub">How the biggest broker entered the blockchain</div>
+      </div>
+      <div class="cmap" onclick="scrollTo('#mod4')">
+        <div class="num">04</div>
+        <div class="title">The Index</div>
+        <div class="sub">A stock-dividend token built on Robinhood Chain</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     MODULE 01 — WHAT IS RWA
+═══════════════════════════════════════════ -->
+<div id="mod1" class="mod-divider">
+  <div class="wrap">
+    <div class="mod-divider-inner">
+      <div class="mod-label">Module 01</div>
+      <div class="mod-header" style="padding-top:0;border-bottom:none">
+        <h2>What Is a Real World Asset?</h2>
+        <p class="intro">Before we get to billion-dollar protocols and stock-paying tokens, we need to understand the core idea — <b>what does it actually mean to put a real asset on a blockchain?</b></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">The Basic Idea</div>
+    <h2 class="sh">Real world meets the blockchain</h2>
+    <p class="lede">A <b>Real World Asset (RWA)</b> is exactly what it sounds like: something that exists in the real world — a stock, a bond, a building, a bar of gold, a cow — that gets represented as a digital token on a blockchain.</p>
+    <p class="body-text">Think about what owning a stock certificate used to mean. You had a piece of paper — or later, a digital entry in a brokerage database — that said you owned a piece of a company. <b>Tokenization is doing that same thing, but on a blockchain.</b> Instead of a database entry at Fidelity, your ownership lives in a smart contract that anyone can verify, that can move across borders in seconds, and that can plug directly into decentralized finance (DeFi) apps.</p>
+    <p class="body-text" style="margin-top:14px">The reason this matters: traditional finance has walls. You need a brokerage account to buy Apple stock. You need to be in the right country, have the right documents, meet the right minimums. <b>Tokenization chips away at those walls.</b></p>
+    <div class="callout" style="margin-top:24px">
+      <h3>The cow example (this just happened)</h3>
+      <p>In July 2026, a dairy farm in Brazil tokenized <b>10 cows</b> — giving each one a unique blockchain ID generated from AI sensor collar data — and used them as verified collateral to secure a <b>R$100,000 loan on B3, Brazil's stock exchange.</b> The cows' health and location tracked in real time, no inspector needed. This is RWA tokenization solving a real problem: farmers who couldn't access credit, now can.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">The Four Categories</div>
+    <h2 class="sh">What gets tokenized?</h2>
+    <p class="lede">RWAs aren't one thing. There are four main categories, each with different risk, return, and purpose.</p>
+    <div class="grid g2">
+      <div class="card">
+        <div class="badge">Category 01</div>
+        <h3>Government Bonds &amp; T-Bills</h3>
+        <p>The safest category. Protocols like <b>Ondo Finance, BlackRock BUIDL, and Franklin Templeton BENJI</b> take U.S. Treasury bills — the most stable assets on earth — and put them on-chain. Typical yield: <b>3.5–5% APY.</b> This is what institutions use to park cash and earn yield without leaving the blockchain ecosystem.</p>
+      </div>
+      <div class="card">
+        <div class="badge">Category 02</div>
+        <h3>Private Credit &amp; Loans</h3>
+        <p>Higher risk, higher reward. Protocols like <b>Maple Finance, Centrifuge, and Goldfinch</b> tokenize business loans, mortgages, and lending pools. Yield: <b>8–16% APY.</b> The catch: if a borrower defaults, you feel it. Not backed by the U.S. government — backed by a company's ability to repay.</p>
+      </div>
+      <div class="card">
+        <div class="badge">Category 03</div>
+        <h3>Tokenized Stocks &amp; ETFs</h3>
+        <p>On-chain versions of equity exposure. You get price movement of stocks like Nvidia or Apple, <b>tradeable 24/7</b> without a brokerage. Platforms like <b>Ondo Global Markets and Robinhood Chain's Stock Tokens</b> lead here. Important: these are price trackers, <b>not real shares</b> — no voting rights, no dividends.</p>
+      </div>
+      <div class="card">
+        <div class="badge">Category 04</div>
+        <h3>Real Estate, Gold &amp; More</h3>
+        <p>Platforms like <b>RealT</b> let you own a fraction of a rental property in Detroit for as little as $50. <b>PAX Gold (PAXG)</b> is one token backed by one troy ounce of real gold in a vault. Even <b>carbon credits, art, and infrastructure</b> are being tokenized. The category is as wide as the physical world.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Why Now?</div>
+    <h2 class="sh">The market by the numbers</h2>
+    <p class="lede">This isn't a future prediction — it's already happening at massive scale.</p>
+    <div class="stats">
+      <div class="stat"><div class="n">$30B+</div><div class="l">Total RWA value on-chain as of mid-2026</div></div>
+      <div class="stat"><div class="n">$4T</div><div class="l">McKinsey's projected RWA market by 2030</div></div>
+      <div class="stat"><div class="n">$30T</div><div class="l">Standard Chartered's projection by 2034</div></div>
+      <div class="stat"><div class="n">140%</div><div class="l">YoY growth in RWA protocol developer activity (2023–2025)</div></div>
+    </div>
+    <p class="asof">Sources: RWA.xyz, McKinsey, Standard Chartered, Electric Capital — mid-2026</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Why It Matters</div>
+    <h2 class="sh">Three problems tokenization solves</h2>
+    <div class="grid g3">
+      <div class="card">
+        <h3>Access</h3>
+        <p>A minimum buy-in of <b>$50 for real estate</b> (vs. a $200K down payment). Stocks available in <b>120+ countries</b> without a local brokerage. Credit for farmers with no bank relationships.</p>
+      </div>
+      <div class="card">
+        <h3>Hours</h3>
+        <p>Traditional markets close at 4pm ET, Monday–Friday. Tokenized assets trade <b>24 hours a day, 7 days a week, 365 days a year.</b> No waiting for Monday morning.</p>
+      </div>
+      <div class="card">
+        <h3>Composability</h3>
+        <p>Once an asset is on-chain, it plugs into <b>DeFi protocols automatically</b>. Use your tokenized Treasury bill as collateral for a loan. Earn yield while it sits in a lending pool. That's not possible with traditional finance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Module 01 — Check Yourself</div>
+    <h2 class="sh">Quick quiz</h2>
+    <div class="q" data-module="1">
+      <h3>1. A tokenized stock like NVDAx (Nvidia on-chain) gives you…</h3>
+      <button class="opt" data-r="w">Real Nvidia shares with voting rights</button>
+      <button class="opt" data-r="c">Price exposure to Nvidia, tradeable 24/7, with no shareholder rights</button>
+      <button class="opt" data-r="w">Nvidia's quarterly dividend payments</button>
+      <p class="why">Tokenized stocks track the price but don't transfer legal ownership. No voting, no dividends, no brokerage protections.</p>
+    </div>
+    <div class="q" data-module="1">
+      <h3>2. Which RWA category typically offers the highest yield?</h3>
+      <button class="opt" data-r="w">Tokenized U.S. Treasury bills (3–5%)</button>
+      <button class="opt" data-r="c">Private credit loans (8–16%)</button>
+      <button class="opt" data-r="w">Tokenized real estate (6–10%)</button>
+      <p class="why">Higher yields come with higher risk. Private credit means actual loan default risk — compensated by 8–16% APY vs. the safety of government-backed Treasuries.</p>
+    </div>
+    <p class="score" id="score-1">Score: 0 / 2</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     MODULE 02 — THE PLAYERS
+═══════════════════════════════════════════ -->
+<div id="mod2" class="mod-divider">
+  <div class="wrap">
+    <div class="mod-divider-inner">
+      <div class="mod-label">Module 02</div>
+      <div class="mod-header" style="padding-top:0;border-bottom:none">
+        <h2>Who's Building the RWA World?</h2>
+        <p class="intro">From crypto-native protocols to BlackRock — <b>the biggest names in finance are all competing for the same prize:</b> owning the infrastructure that brings trillions of dollars of real-world assets on-chain.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">The Leaderboard</div>
+    <h2 class="sh">Top projects to know</h2>
+
+    <div class="project">
+      <div><div class="proj-icon" style="background:rgba(91,142,240,.15);color:#5B8EF0">ONDO</div></div>
+      <div>
+        <h3>Ondo Finance</h3>
+        <p>The <b>dominant crypto-native RWA protocol</b>, and the one you'll hear about most. Ondo has crossed <b>$4 billion in TVL</b> (total value locked) — more than doubling since the start of 2026. Its flagship products are:</p>
+        <p style="margin-top:10px"><b>OUSG</b> — tokenized U.S. Treasury exposure for institutional investors (~3.5% APY). <b>USDY</b> — a yield-bearing stablecoin for non-U.S. users backed by T-bills. <b>Ondo Global Markets (OGM)</b> — tokenized exposure to 260+ U.S. stocks and ETFs (NVDA, TSLA, SPY, QQQ), available 24/7 on Ethereum, Solana, and BNB Chain. OGM crossed $1 billion in TVL by May 2026, becoming the <b>first tokenized equities platform to hit that milestone.</b></p>
+        <p style="margin-top:10px">BlackRock — the world's largest asset manager — is Ondo's single largest token holder. The SEC closed its investigation into Ondo in 2026, removing a major regulatory overhang.</p>
+        <div class="proj-meta">
+          <span class="proj-tag highlight">$4B+ TVL</span>
+          <span class="proj-tag">Tokenized Treasuries</span>
+          <span class="proj-tag">Tokenized Equities</span>
+          <span class="proj-tag">BlackRock-backed</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div><div class="proj-icon" style="background:rgba(0,0,0,.3);color:var(--ink)">BLK</div></div>
+      <div>
+        <h3>BlackRock BUIDL</h3>
+        <p>The world's largest asset manager — managing over <b>$10 trillion</b> — launched its own tokenized money market fund on Ethereum. BUIDL offers roughly <b>4.8–5% APY</b> backed by U.S. government securities. It captured <b>$2.38 billion in assets within 15 months</b> of launching, securing roughly 40% of the tokenized Treasury market. The catch: $5 million minimum investment and qualified purchaser rules — this is institutional-grade, not retail.</p>
+        <div class="proj-meta">
+          <span class="proj-tag highlight">$2.4B+ AUM</span>
+          <span class="proj-tag">Tokenized Treasuries</span>
+          <span class="proj-tag">Institutional only</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div><div class="proj-icon" style="background:rgba(76,195,138,.12);color:var(--green)">CNTR</div></div>
+      <div>
+        <h3>Centrifuge</h3>
+        <p>One of the <b>oldest and most battle-tested RWA protocols</b>, with over <b>$1.45 billion in TVL</b>. Centrifuge specializes in asset-backed private credit — real businesses (shipping invoices, real estate loans, trade finance) tokenized as on-chain pools. Backed by Janus Henderson and S&amp;P Dow Jones Indices. Yield: <b>8–12% APY</b>. MakerDAO used Centrifuge to back a large portion of its DAI stablecoin with real-world assets — accounting for nearly 80% of MakerDAO's fee revenue.</p>
+        <div class="proj-meta">
+          <span class="proj-tag highlight">$1.45B+ TVL</span>
+          <span class="proj-tag">Private Credit</span>
+          <span class="proj-tag">8–12% APY</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div><div class="proj-icon" style="background:rgba(229,100,90,.12);color:var(--red)">MPL</div></div>
+      <div>
+        <h3>Maple Finance</h3>
+        <p>Institutional on-chain lending. Maple builds infrastructure for capital providers to fund institutional borrowers through on-chain pools — think of it as a credit marketplace where everything is recorded on-chain. Yield: <b>5–9% APY</b>. Unlike Centrifuge (which focuses on tangible assets), Maple deals with corporate credit risk: you're lending to trading firms and fintechs, with underwriting done by pool managers who post collateral schedules on-chain.</p>
+        <div class="proj-meta">
+          <span class="proj-tag">Private Credit</span>
+          <span class="proj-tag">5–9% APY</span>
+          <span class="proj-tag">Institutional Lending</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div><div class="proj-icon" style="background:rgba(212,169,55,.12);color:var(--gold)">GFI</div></div>
+      <div>
+        <h3>Goldfinch</h3>
+        <p>The most mission-driven player: Goldfinch funds <b>real businesses in emerging markets</b> — Latin America, Africa, Southeast Asia — without requiring crypto collateral. Human auditors vet borrowers based on actual business performance. Over <b>$170 million in loans deployed</b> at an average <b>12% APR</b>. This is the closest the RWA world gets to microfinance — DeFi capital reaching businesses that traditional banks have written off.</p>
+        <div class="proj-meta">
+          <span class="proj-tag highlight">$170M+ deployed</span>
+          <span class="proj-tag">Emerging Markets</span>
+          <span class="proj-tag">~12% APR</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div><div class="proj-icon" style="background:rgba(91,142,240,.12);color:var(--blue)">BENJI</div></div>
+      <div>
+        <h3>Franklin Templeton BENJI</h3>
+        <p>Franklin Templeton — a <b>$1.5 trillion traditional asset manager</b> — launched BENJI, a tokenized government money fund now deployed across <b>8 different blockchains</b> (Ethereum, Stellar, Polygon, Arbitrum, and more). Over <b>$800 million in AUM</b> as of May 2026. BENJI shows that legacy Wall Street firms aren't just watching — they're building on-chain infrastructure themselves.</p>
+        <div class="proj-meta">
+          <span class="proj-tag highlight">$800M+ AUM</span>
+          <span class="proj-tag">8 Chains</span>
+          <span class="proj-tag">Tokenized Treasuries</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">The Yield Ladder</div>
+    <h2 class="sh">Risk vs. reward at a glance</h2>
+    <p class="lede">Every yield number comes with a corresponding risk. Here's how the RWA stack ranks from safest to highest-reward.</p>
+    <table class="yield-table">
+      <thead>
+        <tr><th>Product</th><th>Protocol</th><th>Yield</th><th>Risk Level</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Tokenized T-Bills</td><td>BlackRock BUIDL, Ondo OUSG, Franklin BENJI</td><td><b>3.5–5%</b></td><td style="color:var(--green)">Low — U.S. gov't backed</td></tr>
+        <tr><td>Asset-Backed Credit</td><td>Centrifuge, Huma Finance</td><td><b>8–12%</b></td><td style="color:var(--gold)">Medium — secured by assets</td></tr>
+        <tr><td>Corporate Credit</td><td>Maple Finance</td><td><b>5–9%</b></td><td style="color:var(--gold)">Medium — institutional borrowers</td></tr>
+        <tr><td>Emerging Market Loans</td><td>Goldfinch, Credix</td><td><b>10–16%</b></td><td style="color:var(--red)">Higher — borrower default risk</td></tr>
+        <tr><td>Tokenized Stocks</td><td>Ondo Global Markets, Robinhood Chain</td><td><b>Market price only</b></td><td style="color:var(--red)">High — equity price risk</td></tr>
+      </tbody>
+    </table>
+    <p class="asof" style="margin-top:12px">Yields as of mid-2026. Past yield does not guarantee future performance.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Module 02 — Check Yourself</div>
+    <h2 class="sh">Quick quiz</h2>
+    <div class="q" data-module="2">
+      <h3>1. Which project has the highest TVL and is considered the dominant crypto-native RWA protocol?</h3>
+      <button class="opt" data-r="w">BlackRock BUIDL</button>
+      <button class="opt" data-r="c">Ondo Finance</button>
+      <button class="opt" data-r="w">Centrifuge</button>
+      <p class="why">Ondo Finance leads with $4B+ TVL and 70% market share in tokenized equities — the crypto-native benchmark for the whole RWA sector.</p>
+    </div>
+    <div class="q" data-module="2">
+      <h3>2. Goldfinch is different from other RWA protocols because…</h3>
+      <button class="opt" data-r="w">It only works with U.S. Treasury bonds</button>
+      <button class="opt" data-r="c">It lends to real businesses in emerging markets without requiring crypto collateral</button>
+      <button class="opt" data-r="w">It's backed exclusively by BlackRock</button>
+      <p class="why">Goldfinch uses human auditors and off-chain underwriting to lend to businesses in Africa, Latin America, and Southeast Asia — bringing DeFi capital to markets banks ignore.</p>
+    </div>
+    <p class="score" id="score-2">Score: 0 / 2</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     MODULE 03 — ROBINHOOD CHAIN
+═══════════════════════════════════════════ -->
+<div id="mod3" class="mod-divider">
+  <div class="wrap">
+    <div class="mod-divider-inner">
+      <div class="mod-label">Module 03</div>
+      <div class="mod-header" style="padding-top:0;border-bottom:none">
+        <h2>Robinhood Chain: Wall Street Comes On-Chain</h2>
+        <p class="intro">On July 1, 2026, Robinhood — the app that already had <b>23 million funded users</b> — launched its own blockchain. This is the bridge between the RWA projects we just covered and the token we're about to study.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">What It Is</div>
+    <h2 class="sh">A blockchain built for finance, not speculation</h2>
+    <p class="lede">Robinhood Chain is an <b>Ethereum Layer 2</b> — meaning it sits on top of Ethereum's security but runs faster and cheaper. It's built on <b>Arbitrum's Orbit technology</b>, the same stack powering dozens of specialized blockchains.</p>
+    <p class="body-text">The difference from other chains: Robinhood didn't launch a blockchain and then try to find users. They had <b>23 million funded retail investors</b> who already trusted the Robinhood brand, then opened a blockchain for developers to build on. That's the entire pitch — not better technology, <b>better distribution.</b></p>
+    <div class="callout" style="margin-top:22px">
+      <h3>The launch event was called "The World Is Flat"</h3>
+      <p>The name says it all — the goal is to remove the geographic and financial walls that keep most of the world locked out of U.S. financial markets. Stock Tokens are available to users in <b>120+ countries</b>. A trader in Lagos can now get 24/7 exposure to Nvidia without a U.S. brokerage account.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">What Launched</div>
+    <h2 class="sh">Three products, one chain</h2>
+    <div class="grid g3">
+      <div class="card">
+        <div class="badge">Product 01</div>
+        <h3>Stock Tokens</h3>
+        <p>Tokenized versions of U.S. stocks and ETFs — NVDA, AAPL, GOOG, MSFT, SPY, QQQ and more. Trade <b>24/7, in 120+ countries</b>. The catalog has grown from 200 at launch to <b>2,000+ tokens</b>. Critical note: these are <b>debt instruments, not equity</b> — no shareholder rights per the SEC's January 2026 guidance.</p>
+      </div>
+      <div class="card">
+        <div class="badge">Product 02</div>
+        <h3>USDG Yield (Robinhood Earn)</h3>
+        <p>Users can earn approximately <b>7% self-custody yield</b> on USDG (Robinhood's stablecoin) via the Morpho lending protocol — with insurance. This brings DeFi-grade yields to mainstream users without requiring them to understand DeFi at all.</p>
+      </div>
+      <div class="card">
+        <div class="badge">Product 03</div>
+        <h3>AI Agent Trading</h3>
+        <p>Automated on-chain agents that can <b>trade on your behalf</b>, execute strategies, and interact with DeFi protocols. Described as "AI-native" infrastructure — one of the first major retail platforms to bake this in from day one.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">The Ecosystem</div>
+    <h2 class="sh">Who built on it from day one</h2>
+    <p class="lede">Robinhood Chain launched with a full ecosystem of protocols already live — not a ghost chain waiting for liquidity.</p>
+    <div class="grid g2">
+      <div class="card">
+        <h3>Uniswap</h3>
+        <p>The largest decentralized exchange — deployed as the primary public AMM (automated market maker). Most trading volume runs through Uniswap on Robinhood Chain.</p>
+      </div>
+      <div class="card">
+        <h3>Arcus (dYdX Labs × Robinhood)</h3>
+        <p>A DEX specifically built for stock tokens and crypto, co-built between dYdX Labs and Robinhood Crypto — combining institutional-grade perpetuals infrastructure with Robinhood's stock token catalog.</p>
+      </div>
+      <div class="card">
+        <h3>Morpho</h3>
+        <p>The lending protocol powering Robinhood Earn's 7% USDG yield. Integrated directly into Robinhood's consumer product — users earn DeFi yields without knowing it's DeFi.</p>
+      </div>
+      <div class="card">
+        <h3>Lighter</h3>
+        <p>A ZK-powered decentralized exchange. Notable: stock tokens on Robinhood Chain are now eligible as <b>collateral on Lighter</b> — meaning you can borrow against your tokenized NVDA position.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Early Numbers</div>
+    <h2 class="sh">What the first weeks looked like</h2>
+    <div class="stats">
+      <div class="stat"><div class="n">$3.1B</div><div class="l">DEX volume in the first 7 days — briefly top-5 blockchain by volume</div></div>
+      <div class="stat"><div class="n">$76M</div><div class="l">TVL as of July 6, 2026 — still early</div></div>
+      <div class="stat"><div class="n">$300M</div><div class="l">Stablecoins on the network within weeks of launch</div></div>
+      <div class="stat"><div class="n">$14M</div><div class="l">Tokenized stock value on-chain — still small vs. $851M on Ondo</div></div>
+      <div class="stat"><div class="n">75%</div><div class="l">Share of early DEX volume that was memecoins, not the intended RWA use case</div></div>
+      <div class="stat"><div class="n">23M</div><div class="l">Existing Robinhood users — the distribution advantage no other chain has</div></div>
+    </div>
+    <p class="asof">Figures as of mid-July 2026. Early-stage chain — metrics will shift significantly.</p>
+    <div class="callout" style="margin-top:24px">
+      <h3>The honest reality check</h3>
+      <p>The chain launched hot — but most of the early volume was <b>memecoins, not tokenized stocks</b>. The biggest pool in the first weeks was a memecoin called CASHCAT, not NVDAx. The RWA vision is intact, but <b>speculation always arrives before adoption</b> in crypto. That gap between Robinhood's stated mission and what traders actually did is the most important story on the chain right now.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Module 03 — Check Yourself</div>
+    <h2 class="sh">Quick quiz</h2>
+    <div class="q" data-module="3">
+      <h3>1. What is Robinhood Chain's biggest advantage over other blockchains?</h3>
+      <button class="opt" data-r="w">It's the fastest blockchain ever built</button>
+      <button class="opt" data-r="c">It has 23 million existing retail users as a built-in distribution channel</button>
+      <button class="opt" data-r="w">It doesn't use Ethereum's technology</button>
+      <p class="why">Distribution is Robinhood Chain's entire thesis. Most chains build first, then search for users. Robinhood already had 23 million people who trusted the brand before the chain launched.</p>
+    </div>
+    <div class="q" data-module="3">
+      <h3>2. What did most of Robinhood Chain's early trading volume actually consist of?</h3>
+      <button class="opt" data-r="w">Tokenized U.S. stocks as intended</button>
+      <button class="opt" data-r="c">Memecoins — representing ~75% of early DEX volume</button>
+      <button class="opt" data-r="w">USDG stablecoin transfers</button>
+      <p class="why">Speculation always arrives before adoption. Despite the RWA mission, early traders used the chain for memecoins. The tokenized stock activity is real but still small relative to the speculation.</p>
+    </div>
+    <p class="score" id="score-3">Score: 0 / 2</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     MODULE 04 — THE INDEX
+═══════════════════════════════════════════ -->
+<div id="mod4" class="mod-divider">
+  <div class="wrap">
+    <div class="mod-divider-inner">
+      <div class="mod-label">Module 04</div>
+      <div class="mod-header" style="padding-top:0;border-bottom:none">
+        <h2>The Index: A Stock-Dividend Token</h2>
+        <p class="intro">Everything in the first three modules — RWA tokenization, the rise of on-chain equities, Robinhood Chain — sets the stage for this. <b>The Index ($INDEX) is a token that uses all of it to pay its holders in stocks, every 15 minutes.</b></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="basics">
+  <div class="wrap">
+    <div class="eyebrow">01 — The Big Idea</div>
+    <h2 class="sh">What is The Index?</h2>
+    <p class="lede">The Index ($INDEX) is a crypto token built on Robinhood Chain. Its pitch fits in one sentence: <b>hold the token, and it pays you in tokenized stocks like Nvidia and Apple, automatically, every 15 minutes.</b></p>
+    <div class="grid g2">
+      <div class="card">
+        <h3>Old model: reflection tokens</h3>
+        <p>Tokens like SafeMoon (2021) taxed every trade and paid holders back in <b>more of the same token</b>. The "yield" was just recycled hype — when trading slowed, rewards died.</p>
+      </div>
+      <div class="card">
+        <h3>New twist: stock dividends</h3>
+        <p>The Index keeps the tax model but pays holders in something outside itself: <b>tokenized shares of real companies</b>. Same engine, different fuel coming out the exhaust.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="loop">
+  <div class="wrap">
+    <div class="eyebrow">02 — The Machine</div>
+    <h2 class="sh">How the loop works</h2>
+    <p class="lede">Five steps, running on repeat. Every trade of $INDEX feeds the machine.</p>
+    <div class="loop">
+      <div class="step">
+        <div>
+          <h3>Someone trades $INDEX</h3>
+          <p>A trader buys or sells the token on a decentralized exchange (DEX) on Robinhood Chain.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h3>A 3% tax comes off the top — in ETH</h3>
+          <p>Every buy <b>and</b> every sell pays a 3% fee. Trade $1,000 and about <span class="mono">$30</span> goes to the protocol instead of you. Round trip (in + out) costs you roughly <b>6% before the price even moves</b>.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h3>The fee pool fills up</h3>
+          <p>A smart contract collects all that ETH. Think of it as a vending machine with no owner — it just runs its programmed rules.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h3>ETH gets swapped for tokenized stocks</h3>
+          <p>The contract spends the pooled ETH buying stock tokens — <span class="mono">NVDAx, AAPLx</span> and others — from trading pools on Robinhood Chain. The protocol claims to be a <b>top-3 stock buyer on the entire chain</b>.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h3>Holders get paid, pro-rata, every 15 minutes</h3>
+          <p><b>Pro-rata</b> means proportional: own 1% of the supply, receive about 1% of each payout. The stock tokens land directly in your wallet — no staking, no claiming, no button to press.</p>
+        </div>
+      </div>
+    </div>
+    <div class="loopback">↻ <b>Then it repeats.</b> More trading volume → bigger fee pool → bigger stock payouts. Less volume → the payouts shrink. Remember that; it's the whole ballgame.</div>
+  </div>
+</section>
+
+<section id="vocab">
+  <div class="wrap">
+    <div class="eyebrow">03 — Key Terms</div>
+    <h2 class="sh">Words you need for this module</h2>
+    <dl>
+      <div class="term"><dt>Tax token</dt><dd>A token whose contract automatically skims a fee off every trade and routes it somewhere — to holders, a treasury, or liquidity.</dd></div>
+      <div class="term"><dt>Pro-rata</dt><dd>Split in proportion to what you own. <b>Own 1% of supply, receive 1% of each distribution.</b> Bigger bag, bigger slice.</dd></div>
+      <div class="term"><dt>Fee pool / treasury</dt><dd>The smart contract that collects trade taxes before routing them to stock purchases.</dd></div>
+      <div class="term"><dt>Flywheel</dt><dd>A self-reinforcing loop where growth feeds more growth — and shrinkage feeds more shrinkage.</dd></div>
+      <div class="term"><dt>DEX</dt><dd>Decentralized exchange — a trading venue run by smart contracts (like Uniswap) instead of a company.</dd></div>
+      <div class="term"><dt>Perpetuals (perps)</dt><dd>Futures contracts with no expiration date. rwa.wtf lets you trade tokenized stocks with up to 50x leverage using these.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section id="engine2">
+  <div class="wrap">
+    <div class="eyebrow">04 — The Second Engine</div>
+    <h2 class="sh">rwa.wtf — more than just a token</h2>
+    <p class="lede">This is the part most people miss. The Index team also launched <b>rwa.wtf</b> — their own trading platform where users trade tokenized stocks and RWAs with up to <b>50x leverage</b>, settled on-chain, 24/7. Its fees feed the same holders.</p>
+    <div class="splitbar" role="img" aria-label="75 percent of fees buy stocks for holders, 25 percent deepens liquidity">
+      <div class="s75">75% → buys stocks for holders</div>
+      <div class="s25">25% → liquidity</div>
+    </div>
+    <p class="capt">How every rwa.wtf trading fee is split, per the team.</p>
+    <p class="body-text" style="margin-top:18px">Why this matters: distributions no longer depend <i>only</i> on people trading $INDEX. A real product with its own users could keep the dividends flowing even if token trading cools off. The platform also added an <b>Intel dashboard</b> (rwa.wtf/intel) for researching stocks, ETFs, insider trades, and politician trades, plus 20+ spot assets.</p>
+  </div>
+</section>
+
+<section id="flywheel">
+  <div class="wrap">
+    <div class="eyebrow">05 — The Flywheel</div>
+    <h2 class="sh">Two spirals, one machine</h2>
+    <p class="lede">The same loop that makes this exciting is the loop that can kill it. Study both directions.</p>
+    <div class="grid g2">
+      <div class="spiral up">
+        <h3>▲ The up spiral</h3>
+        <p class="chain">More volume <span class="arrowword">→</span> bigger fee pool <span class="arrowword">→</span> <b>bigger stock payouts</b> <span class="arrowword">→</span> holding looks attractive <span class="arrowword">→</span> more buyers <span class="arrowword">→</span> more volume. The protocol constantly buying NVDAx and AAPLx also makes it a steady bid for Robinhood Chain's whole RWA ecosystem.</p>
+      </div>
+      <div class="spiral down">
+        <h3>▼ The down spiral</h3>
+        <p class="chain">Volume dries up <span class="arrowword">→</span> payouts shrink <span class="arrowword">→</span> <b>the "yield" disappears</b> <span class="arrowword">→</span> holders sell <span class="arrowword">→</span> price and volume compress together. This is how nearly every tax token in history has ended. The payout asset is new; the math is not.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="numbers">
+  <div class="wrap">
+    <div class="eyebrow">06 — The Numbers</div>
+    <h2 class="sh">Snapshot</h2>
+    <div class="stats">
+      <div class="stat"><div class="n">3%</div><div class="l">Tax on every buy and sell (~6% round trip)</div></div>
+      <div class="stat"><div class="n">15 min</div><div class="l">Distribution cycle — stocks sent straight to wallets</div></div>
+      <div class="stat"><div class="n">$18M+</div><div class="l">Market cap after a 150%+ single-day rally in July 2026</div></div>
+      <div class="stat"><div class="n">$155K</div><div class="l">Largest single distribution of RWAs to holders</div></div>
+      <div class="stat"><div class="n">$500K+</div><div class="l">Total RWAs distributed to holders so far</div></div>
+      <div class="stat"><div class="n">Top 3</div><div class="l">Claimed rank among stock-token buyers on Robinhood Chain</div></div>
+      <div class="stat"><div class="n">50x</div><div class="l">Max leverage on rwa.wtf, the team's perps platform</div></div>
+      <div class="stat"><div class="n">0.27%</div><div class="l">Share of chain activity that was actually tokenized stocks in early July</div></div>
+    </div>
+    <p class="asof">Figures as of mid-July 2026 — verify before quoting.</p>
+  </div>
+</section>
+
+<section id="risks">
+  <div class="wrap">
+    <div class="eyebrow">07 — Read This Twice</div>
+    <h2 class="sh">Risks &amp; red flags</h2>
+    <div>
+      <div class="risk"><div class="flag">01</div><div><h3>You are not buying real stock</h3><p>Distributions are tokenized trackers — <b>no voting rights, no company dividends, no brokerage protections</b>. Your exit is whatever the on-chain pool offers, and liquidity can be thin.</p></div></div>
+      <div class="risk"><div class="flag">02</div><div><h3>The yield depends on volume</h3><p>If trading slows, payouts shrink. The down spiral is real — it's the historical fate of every tax token. rwa.wtf revenue may soften this, or may not be enough.</p></div></div>
+      <div class="risk"><div class="flag">03</div><div><h3>No public audit, anonymous team</h3><p>As of this writing there's no published security audit and no doxxed team. The contract that holds and routes fees is a trust point until proven otherwise.</p></div></div>
+      <div class="risk"><div class="flag">04</div><div><h3>The 6% toll</h3><p>3% in + 3% out means short-term trading is structurally punished. This design forces you to be a long-term holder — which is the point, and the trap.</p></div></div>
+      <div class="risk"><div class="flag">05</div><div><h3>Stacked risk layers</h3><p>You hold: a weeks-old micro-cap token → paying in stock-token wrappers → issued on a weeks-old chain. Each layer carries its own smart-contract, issuer, and regulatory risk.</p></div></div>
+      <div class="risk"><div class="flag">06</div><div><h3>Research trap: the name collision</h3><p>Searching "$INDEX tokenomics" mostly returns <b>Index Coop</b> — an unrelated 2020 governance token with the same ticker. Don't mix their data into your research.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="quiz">
+  <div class="wrap">
+    <div class="eyebrow">08 — Final Quiz</div>
+    <h2 class="sh">Full course: 5 questions</h2>
+    <p class="lede">This covers all four modules. Tap an answer.</p>
+
+    <div class="q" data-module="4">
+      <h3>1. What do $INDEX holders receive as rewards?</h3>
+      <button class="opt" data-r="w">More $INDEX tokens</button>
+      <button class="opt" data-r="c">Tokenized stocks (like NVDAx) sent to their wallet every 15 minutes</button>
+      <button class="opt" data-r="w">Real brokerage shares with voting rights</button>
+      <p class="why">Holders receive tokenized stock trackers — not more $INDEX, and not real shares.</p>
+    </div>
+
+    <div class="q" data-module="4">
+      <h3>2. Which statement best describes the RWA market in mid-2026?</h3>
+      <button class="opt" data-r="w">It's purely experimental — no real money is involved yet</button>
+      <button class="opt" data-r="c">Over $30 billion in real-world assets are already on-chain, led by tokenized Treasuries and private credit</button>
+      <button class="opt" data-r="w">Only BlackRock is active in this space</button>
+      <p class="why">The RWA market crossed $30B in mid-2026. Ondo, BlackRock, Centrifuge, Maple, and Franklin Templeton are all live with real products processing real volume.</p>
+    </div>
+
+    <div class="q" data-module="4">
+      <h3>3. What is Robinhood Chain's core advantage over competitors?</h3>
+      <button class="opt" data-r="w">It was the first blockchain ever built</button>
+      <button class="opt" data-r="w">It doesn't require ETH for gas fees</button>
+      <button class="opt" data-r="c">23 million existing retail users as a built-in distribution channel</button>
+      <p class="why">Distribution is Robinhood Chain's entire thesis. Technology is available to everyone — a 23M-user distribution channel is not.</p>
+    </div>
+
+    <div class="q" data-module="4">
+      <h3>4. What is the biggest structural risk to The Index's reward model?</h3>
+      <button class="opt" data-r="w">Nvidia's stock price falling</button>
+      <button class="opt" data-r="c">Trading volume drying up, shrinking the fee pool and collapsing distributions</button>
+      <button class="opt" data-r="w">The 15-minute distribution timer breaking</button>
+      <p class="why">No volume → no fees → no payouts. This is the down spiral that has ended nearly every tax token in history. The new payout asset doesn't change the underlying math.</p>
+    </div>
+
+    <div class="q" data-module="4">
+      <h3>5. Which RWA protocol is best known for lending to real businesses in emerging markets without requiring crypto collateral?</h3>
+      <button class="opt" data-r="w">Ondo Finance</button>
+      <button class="opt" data-r="w">BlackRock BUIDL</button>
+      <button class="opt" data-r="c">Goldfinch</button>
+      <p class="why">Goldfinch uses human auditors and off-chain underwriting to fund businesses in Africa, Latin America, and Southeast Asia — DeFi capital reaching markets traditional banks ignore.</p>
+    </div>
+
+    <p class="score" id="score-4">Score: 0 / 5</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="disclaimer">
+      <b>Educational content only — not financial advice.</b> Figures reflect public reporting as of mid-July 2026. The Index is a weeks-old, small-cap, high-risk crypto experiment with no published audit. Nothing here is a recommendation to buy, sell, or hold any asset. Always do your own research.
+    </div>
+    <div class="credit">Block Wall Street <span>×</span> B4OF — Financial Literacy For The Culture</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // SCROLL HELPER
+  window.scrollTo = function(id){
+    var el=document.querySelector(id);
+    if(el){el.scrollIntoView({behavior:'smooth',block:'start'})}
+  };
+
+  // PROGRESS BAR
+  var fill=document.getElementById('prog');
+  window.addEventListener('scroll',function(){
+    var h=document.documentElement;
+    var pct=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
+    fill.style.width=Math.min(pct,100)+'%';
+  });
+
+  // NAV ACTIVE STATE
+  var mods=['mod1','mod2','mod3','mod4'];
+  var btns=document.querySelectorAll('.mod-btn');
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        var idx=mods.indexOf(e.target.id);
+        if(idx>-1){
+          btns.forEach(function(b,i){b.classList.toggle('active',i===idx)});
+        }
+      }
+    });
+  },{rootMargin:'-20% 0px -60% 0px'});
+  mods.forEach(function(id){var el=document.getElementById(id);if(el)obs.observe(el)});
+
+  // QUIZ ENGINE — per-module scoring
+  var scores={1:{s:0,a:0,t:2},2:{s:0,a:0,t:2},3:{s:0,a:0,t:2},4:{s:0,a:0,t:5}};
+  document.querySelectorAll('.q').forEach(function(q){
+    var done=false;
+    var mod=parseInt(q.dataset.module)||4;
+    q.querySelectorAll('.opt').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        if(done)return;
+        done=true;
+        scores[mod].a++;
+        q.classList.add('answered');
+        if(btn.dataset.r==='c'){btn.classList.add('correct');scores[mod].s++;}
+        else{btn.classList.add('wrong');q.querySelector('[data-r="c"]').classList.add('correct');}
+        var sc=scores[mod];
+        var el=document.getElementById('score-'+mod);
+        if(el){
+          var suffix='';
+          if(sc.a===sc.t){suffix=sc.s===sc.t?' — perfect, keep going!':' — review the sections you missed.';}
+          el.textContent='Score: '+sc.s+' / '+sc.t+suffix;
+        }
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
